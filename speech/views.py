@@ -17,10 +17,11 @@ def speech(request, object_id):
   * years - a sequence of year strings/objects
   '''
   speech = get_object_or_404 (Speech, pk=object_id)
-  
+ 
   years = Speech.objects.all().order_by('date')
+  sources = Source.objects.filter(speech__exact=speech).order_by('name')
 
-  result = dict ( speech=speech, years=years  )
+  result = dict ( speech=speech, years=years, sources=sources if sources else None )
   template = loader.get_template("speech.html")    
   context = Context(result)
 

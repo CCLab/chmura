@@ -31,4 +31,4 @@ class Source (models.Model):
   name = models.TextField ()
 
   def __str__(self):
-    return self.cabinet
+    return "%s: %s" % (self.url, self.name)

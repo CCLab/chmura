@@ -39,8 +39,8 @@
       <h3 class="cabinet-name">{{ speech.cabinet.name }}</h3>
       <p>{{ speech.background }}</p>
       <hr />
-      <p>Pełny tekst przemówienia: {% for source in sources %}
-        <a href="{{ source.0 }}">{{ source.1 }}</a>{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}</p>
+      <p>{% if sources %}Pełny tekst przemówienia: {% for source in sources %}
+        <a href="{{ source.url }}">{{ source.name }}</a>{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}{% endif %}</p>
     </div>
   </body>
 </html>
