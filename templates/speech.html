@@ -4,10 +4,11 @@
   
   </head>
   <body>
-    <h1>Polski budzet w slowach</h1>
-    <div class="yearlist" id="yearlist">{% for y in years %}{{ year }}{% endfor %]</div>    
+    <h1>Polski budżet w słowach</h1>
+    <div class="yearlist" id="yearlist">{% for y in years %}
+    <a href="{% url chmura.speech.views.speech object_id=y.id %}">{{ y.date.year }}</a>{% endfor %}</div>    
     <div class="content">
-      <div class="navi-tabs"><p>przemowienia | slowa przez lata</p></div>
+      <div class="navi-tabs"><p>przemówienia | słowa przez lata</p></div>
       <hr />
       <div class="cloud" id="cloud">
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
@@ -30,13 +31,16 @@
         sollemnes in futurum.</p>
       </div>
       <hr>
-      <h2>{{ year }}</h2>
+      <h2>{{ speech.date.year }}</h2>
       <img src="{{ speech.speaker.head.url }}" id="head" class="head" /> 
       <h4>{{ speech.speaker.function }}</h4>
       <h3>{{ speech.speaker.name }}</h3>
+      <h4>ekipa rządząca</h4>
+      <h3 class="cabinet-name">{{ speech.cabinet.name }}</h3>
       <p>{{ speech.background }}</p>
       <hr />
-      <p>Pełny tekst przemówienia: {% for source in sources %}<a href="{{ source.0 }}">{{ source.1 }}</a></p>
+      <p>Pełny tekst przemówienia: {% for source in sources %}
+        <a href="{{ source.0 }}">{{ source.1 }}</a>{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}</p>
     </div>
   </body>
 </html>
