@@ -4,6 +4,8 @@ import datetime
 
 from models import Speech, Source, Speaker
 
+from chmura.word.views import word_count
+
 #from django.template import Context, RequestContext, loader, Template
 
 from django.template import Context, loader
@@ -22,6 +24,10 @@ def speech(request, object_id):
   sources = Source.objects.filter(speech__exact=speech).order_by('name')
 
   result = dict ( speech=speech, years=years, sources=sources if sources else None )
+  
+  result ['word_count'] = word_count (object_id)[:30]
+#  result ['words_max'] = result['word_count'][0][1]
+  
   template = loader.get_template("speech.html")    
   context = Context(result)
 

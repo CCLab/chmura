@@ -1,9 +1,9 @@
 #
 
 from django.contrib import admin
-#from models import Speaker, Context, Speech, Source
+from models import Lemma, Dict, Word
 
-#admin.site.register(Speaker)
-#admin.site.register(Context)
-#admin.site.register(Speech)
+admin.site.register(Lemma)
+admin.site.register(Word)
+admin.site.register(Dict)
 #admin.site.register(Source)
