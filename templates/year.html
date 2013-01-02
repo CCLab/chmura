@@ -1,0 +1,7 @@
+{% extends "page.html" %}{% block content %}      <div class="axis-horizontal">{% for s in speeches %}{{ s.0 }}{% endfor %}</div>
+       <div class="">{% for s in speeches %}
+         <div class="word-column">{% for w in s.1 %}
+           {{ w.0 }}({{ w.1 }})<br />{% endfor %}
+         </div>{% endfor %}
+       </div>
+{% endblock content %}

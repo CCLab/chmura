@@ -13,7 +13,7 @@
       <div class="navi-tabs"><p>przemówienia | słowa przez lata</p></div>
       <hr />
       <div class="cloud" id="cloud">{% with word_count.0.1 as max_words %}
-        <p>{% for word in word_count %}<span style="font-size: {% widthratio word.1 max_words 32 %}ex;">{{ word.0 }}</span>{% if not forloop.last %} {% endif %}{% endfor %}</p>       {% endwith %} </div>
+        <p>{% for word in word_count %}<span style="font-size: {% widthratio word.1 max_words 32 %}ex;">{{ word.0 }}{% if not forloop.last %} {% endif %}</span>{% endfor %}</p>       {% endwith %} </div>
       <hr />
       <div class="metainfo">
         <h2>{{ speech.date.year }}</h2>
