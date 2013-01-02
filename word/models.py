@@ -16,7 +16,7 @@ class Lemma (models.Model):
 
 class Ignore (models.Model):
   'Words to be ignored.'
-  lemma = models.ForeignKey(Lemma)
+  lemma = models.ForeignKey(Lemma, unique=True)
    
 class Dict (models.Model):
   lemma = models.ForeignKey (Lemma)

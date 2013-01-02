@@ -1,7 +1,7 @@
 {% extends "page.html" %}{% block content %}      <div class="axis-horizontal">{% for s in speeches %}{{ s.0 }}{% endfor %}</div>
        <div class="">{% for s in speeches %}
-         <div class="word-column">{% for w in s.1 %}
-           {{ w.0 }}({{ w.1 }})<br />{% endfor %}
+         <div class="word-column">{% for w in s.1 %}{% with w.0.id as oid %}
+           <a href="{% url chmura.word.views.word object_id=oid %}">{{ w.0 }}</a>({{ w.1 }})<br />{% endwith %}{% endfor %}
          </div>{% endfor %}
        </div>
 {% endblock content %}
