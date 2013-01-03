@@ -7,12 +7,17 @@ from django.http import HttpResponse as HTTPResponse
 from django.template import Context, RequestContext, loader, Template
 from django.shortcuts import get_object_or_404
 
-from models import Word, Lemma, Ignore
+from models import Word, Lemma, Ignore, Compound
 from chmura.speech.models import Speech
 
 ### utility function
 
 def word_count (speech_id):
+
+  compound_starts = Compound.objects.filter(first__exact=True)
+  compound_lemmas = Lemma.objects.filter(id__in=compound_starts.values_list('lemma', flat=True))
+
+  print compound_lemmas
 
   words = Word.objects.exclude(lemma__id__in=Ignore.objects.all().values_list('lemma',flat=True)).filter(speech__exact=speech_id)
   
@@ -29,7 +34,7 @@ def word_count (speech_id):
   result.sort(key=itemgetter(1)) 
   result.reverse()
 
-  print result
+#  print result
 
   return result
   
@@ -75,8 +80,4 @@ def year (request, object_id, width=3):
   template = loader.get_template("year.html")
   
   return HTTPResponse(template.render(Context(dict(speeches=result, width=width))))
-  
-  
-  
-  
     

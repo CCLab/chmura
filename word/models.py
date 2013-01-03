@@ -47,6 +47,14 @@ class Word (models.Model):
 #  order = models.IntegerField()
 #  word = models.TextField(null=False)
   
+class Compound (models.Model):
+
+  lemma = models.ForeignKey(Lemma)
+  first = models.BooleanField(default=False, blank=False)
+  next = models.ForeignKey('Compound', blank=True, null=True)
   
+  def __unicode__ (self):
+  
+    return self.lemma.word
   
   
