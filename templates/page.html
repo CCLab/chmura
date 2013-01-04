@@ -4,20 +4,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
   <head>
     <title>Polski budżet w słowach</title>
-    <style>
-      * { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; background: Bisque;}
+    <style type="text/css">
+      html, body { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; background: Bisque;}
       h1 { font-weight: lighter; margin-top; 0.5em; margin-left: 1em; margin-bottom: 0.1em; padding: 0.1em;}
       h2 { font-size: 32px; font-weight: lighter; color: Sienna;} 
-      H3 { font-weight: lighter; }
+      h3 { font-weight: lighter; }
       h4 { font-style: italic; font-size: small; }
-      div.navi-tabs { font-variant: small-caps; font-weight: bold; font-size: x-small; margin-left: 6em; margin-top: 0.5em;}
+    
+      div.yearlist { float: left; }
+      div.main { position: relative; left: 5em; width: 80em;}
+      div.navi-tabs { font-weight: bold; font-size: xx-small; margin-left: 6em; margin-top: 0.5em;}
 
       img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
       div.meta-columns { float: none; width: 50em;}
       div.speaker { width: 20em; height: 10em; float:left; }
-      div.speech-background { width: 20em; height: 10em; float:right; clear: right;}      
+      div.speech-background { width: 20em; height: 10em; float:right; clear: right;
+        font-size: small; font-style: italic; }      
       div.cabinet { clear: both; }
-     
+      div.sources { font-size: small; color: Sienna; }
       div.word-column { width:20em; height:80em; text-align: center; background: Cornsilk; }
 
       a { color: Black; background: inherit; text-decoration: none;}
@@ -26,9 +30,12 @@
     </style>
   </head>
   <body>
-    <h1>Polski budżet w słowach</h1>
-    <div class="navi-tabs"><p>przemówienia | słowa przez lata</p></div>
-    <hr />
-    <div class="content">{% block content %}{% endblock %}    </div>
+    <h1>Polski budżet w słowach</h1>{% if years %}
+    <div class="yearlist"><p>{% for y in years %}{{ y.date.year }}{% if not forloop.last %}<br />{% endif %}{% endfor %}</p></div>{% endif %}
+    <div class="main">
+      <div class="navi-tabs"><p><a href="">PRZEMÓWIENIA</a> <a href="">SŁOWA PRZEZ LATA</a></p></div>
+      <hr />
+      <div class="content">{% block content %}{% endblock %}      </div>
+    </div>
   </body>
 </html>
