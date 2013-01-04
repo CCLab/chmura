@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
+  <head>
+    <title>Polski budżet w słowach</title>
+    <style>
+      * { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; background: Bisque;}
+      h1 { font-weight: lighter; margin-top; 0.5em; margin-left: 1em; margin-bottom: 0.1em; padding: 0.1em;}
+      h2 { font-size: 32px; font-weight: lighter; color: Sienna;} 
+      H3 { font-weight: lighter; }
+      h4 { font-style: italic; font-size: small; }
+      div.navi-tabs { font-variant: small-caps; font-weight: bold; font-size: x-small; margin-left: 6em; margin-top: 0.5em;}
+
+      img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
+      div.meta-columns { float: none; width: 50em;}
+      div.speaker { width: 20em; height: 10em; float:left; }
+      div.speech-background { width: 20em; height: 10em; float:right; clear: right;}      
+      div.cabinet { clear: both; }
+     
+      div.word-column { width:20em; height:80em; text-align: center; background: Cornsilk; }
+
+      a { color: Black; background: inherit; text-decoration: none;}
+      
+      hr { float: none; clear: both; }
+    </style>
+  </head>
+  <body>
+    <h1>Polski budżet w słowach</h1>
+    <div class="navi-tabs"><p>przemówienia | słowa przez lata</p></div>
+    <hr />
+    <div class="content">{% block content %}{% endblock %}    </div>
+  </body>
+</html>
