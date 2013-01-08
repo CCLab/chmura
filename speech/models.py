@@ -13,7 +13,7 @@ class Speaker (models.Model):
   function = models.TextField()
   head = models.ImageField(upload_to='uploads')
   
-  def __str__(self):
+  def __unicode__(self):
     return "%s: %s" % (self.name, self.function)
     
 class Speech(models.Model):
@@ -22,7 +22,7 @@ class Speech(models.Model):
   background = models.TextField ()
   cabinet = models.ForeignKey (Cabinet)
   
-  def __str__(self):
+  def __unicode__(self):
     return "%s: %s" % (self.date, self.background)
   
 class Source (models.Model):
@@ -30,5 +30,5 @@ class Source (models.Model):
   url = models.URLField (max_length=1024)
   name = models.TextField ()
 
-  def __str__(self):
+  def __unicode__(self):
     return "%s: %s" % (self.url, self.name)

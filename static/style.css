@@ -1,0 +1,168 @@
+* {margin:0; padding:0; border:0; text-indent:0;
+transition: all 0.2s;
+-webkit-transition: all 0.2s;
+-moz-transition: all 0.2s;
+}
+
+html, body {
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	background-color: #efefef;
+}
+
+/********** clearfix ************/
+.group:before,
+.group:after {
+	content: "";
+	display: table;
+}
+.group:after {
+	clear:both;
+}
+.group {
+	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+/********** clearfix end ************/
+
+a { color: #000; text-decoration: none;}
+
+h1 {
+	font-weight: lighter;
+	font-size: 60px;
+	padding: 20px 40px;
+}
+/*
+h2 { font-size: 32px; font-weight: lighter; color: Sienna;} 
+h3 { font-weight: lighter; }
+h4 { font-style: italic; font-size: small; }
+*/
+
+div.navi-tabs {}
+div.navi-tabs ul {
+	list-style-type: none;
+	height: 33px;
+	text-transform: uppercase;
+	position: relative;
+	z-index: 5;
+	left: 200px;
+	top:1px;
+}
+div.navi-tabs ul li {
+	display: block; float:left;
+	margin-right:10px;
+}
+div.navi-tabs ul li a {
+	display: block;
+	padding:5px 10px;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	background-color: #efefef;
+}
+
+div.navi-tabs ul li a#active {
+	border-bottom:1px solid #fff;
+	background-color: #fff;
+}
+
+    
+div.yearlist {
+	float: left;
+	position:relative;
+}
+
+div.yearlist ul {
+	font-size:20px;
+	list-style-type:none;
+	float: left;
+	position:relative;
+	left:40px;
+}
+
+div.yearlist ul li { }
+div.yearlist ul li a { color: #aaa; }
+div.yearlist ul li a:hover { color: #000; font-weight:bold;}
+div.yearlist ul li a:active { color: #aaa; }
+
+
+div.main {
+	background-color: #fff;
+	position: relative; left: 150px;
+	border: 1px solid #ccc;
+	width:80%;
+	min-width: 1000px;
+}
+
+.cloud {
+	padding: 40px 60px;
+	width:80%;
+	min-width: 800px;
+}
+
+.cloud span { margin: 0 20px 0 0; }
+.cloud span a { }
+.cloud span a:hover { color: #e16f1e; }
+.cloud span a:active { color: #e16f1e; }
+.cloud span a:visited { }
+
+img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
+
+div.metainfo {
+	margin-top:40px;
+	margin-left:20px;
+	width: 80%;
+        min-width: 500px;
+	border-top: 1px solid #ccc;
+	padding: 20px 20px 20px 10px; 
+	
+}
+div.metainfo h2 {
+	font-size:60px;
+	font-weight: lighter;
+	color: #e16f1e;
+	margin-bottom: 10px;
+}
+
+div.speaker {
+	float:left;
+	width: 50%;
+	margin-bottom:20px;
+}
+
+div.speaker img {
+	width:160px;
+	height:160px;
+}
+
+.speaker h3, .cabinet h3 {
+        font-size: 30px;
+        font-weight: lighter;
+}
+.speaker h4, .cabinet h4 {
+	font-size: 20px;
+	font-style: italic;
+	font-weight: lighter; 
+}
+
+div.speech-background {
+	width: 49%;
+	float:right;
+	clear: right;
+	font-size: small;
+	font-style: italic;
+}
+
+div.cabinet {
+	clear: both;
+	width:100%;
+	border-top: 1px solid #ccc;
+	padding: 20px 0;
+
+}
+div.sources {
+	padding: 20px 0;
+        width:50%;
+	border-top: 1px solid #ccc;
+}
+
+div.sources a { color: #e16f1e; font-weight:bold;}
