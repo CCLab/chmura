@@ -4,37 +4,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
   <head>
     <title>Polski budżet w słowach</title>
-    <style type="text/css">
-      html, body { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; background: Bisque;}
-      h1 { font-weight: lighter; margin-top; 0.5em; margin-left: 1em; margin-bottom: 0.1em; padding: 0.1em;}
-      h2 { font-size: 32px; font-weight: lighter; color: Sienna;} 
-      h3 { font-weight: lighter; }
-      h4 { font-style: italic; font-size: small; }
-    
-      div.yearlist { float: left; }
-      div.main { position: relative; left: 5em; width: 80em;}
-      div.navi-tabs { font-weight: bold; font-size: xx-small; margin-left: 6em; margin-top: 0.5em;}
-
-      img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
-      div.meta-columns { float: none; width: 50em;}
-      div.speaker { width: 20em; height: 10em; float:left; }
-      div.speech-background { width: 20em; height: 10em; float:right; clear: right;
-        font-size: small; font-style: italic; }      
-      div.cabinet { clear: both; }
-      div.sources { font-size: small; color: Sienna; }
-      div.word-column { width:20em; height:80em; text-align: center; background: Cornsilk; }
-
-      a { color: Black; background: inherit; text-decoration: none;}
-      
-      hr { float: none; clear: both; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
   </head>
   <body>
-    <h1>Polski budżet w słowach</h1>{% if years %}
-    <div class="yearlist"><p>{% for y in years %}{{ y.date.year }}{% if not forloop.last %}<br />{% endif %}{% endfor %}</p></div>{% endif %}
-    <div class="main">
-      <div class="navi-tabs"><p><a href="">PRZEMÓWIENIA</a> <a href="">SŁOWA PRZEZ LATA</a></p></div>
-      <hr />
+    <h1>Polski budżet w słowach</h1>
+    <div class="navi-tabs group">
+      <ul>
+        <li><a href="" id="active">Przemówienia</a></li>
+        <li><a href="">Słowa przez lata</a></p></li>
+      </ul>
+    </div><!-- navi-tabs end -->
+{% if years %} 
+    <div class="yearlist group">
+      <ul>{% for y in years %}
+        <li><a href="{% url chmura.speech.views.speech object_id=y.id %}">{{ y.date.year }}</a></li>{% endfor %}
+      </ul>
+    </div>{% endif %}
+
+    <div class="main group">
       <div class="content">{% block content %}{% endblock %}      </div>
     </div>
   </body>
