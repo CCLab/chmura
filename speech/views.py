@@ -18,15 +18,25 @@ def speech(request, object_id):
   '''
   * years - a sequence of year strings/objects
   '''
+  
+  NUMWORDS = 50
+  
   speech = get_object_or_404 (Speech, pk=object_id)
  
-  years = Speech.objects.all().order_by('date')
+  years = Speech.objects.all().order_by('-date')
   sources = Source.objects.filter(speech__exact=speech).order_by('name')
 
   result = dict ( speech=speech, years=years, sources=sources if sources else None )
   
-  result ['word_count'] = word_count (object_id)[:30]
-#  result ['words_max'] = result['word_count'][0][1]
+  counted = word_count (object_id)
+  
+  if counted:
+    words = counted [:NUMWORDS]
+    max = counted [0][1]
+  else:
+    words = []
+    max = 0
+  result ['word_count'] = [ (item[0], str((float(item[1])/max)*5)) for item in words]
   
   template = loader.get_template("speech.html")    
   context = Context(result)

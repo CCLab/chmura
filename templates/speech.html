@@ -1,30 +1,29 @@
 {% extends "page.html" %}{% block content %}
-        <div class="cloud" id="cloud">{% with word_count.0.1 as max_words %}
-          <p>{% for word in word_count %}<span style="font-size: {% widthratio word.1 max_words 32 %}ex;">{{ word.0 }}</span>{% if not forloop.last %} {% endif %}{% endfor %}</p>
+        <div class="cloud" id="cloud">{% with word_count.0.1 as max_words %}{% for word in word_count %}
+          <span style="font-size: {{ word.1 }}em;">{{ word.0 }}</span>{% if not forloop.last %}{% endif %}{% endfor %}</p>
         </div>{% endwith %}
-        <hr />
+
         <div class="metainfo">
-          <h2>{{ speech.date.year }}</h2>
-          <div class="meta-columns">
+          <h2>{{ speech.date.year }}</h2>      
+             
+          <div class="speaker">
             <img src="{{ speech.speaker.head.url }}" id="head" class="head" 
               alt="{{ speech.speaker.name }}: portret" /> 
-            <div class="speaker">
-              <h4>{{ speech.speaker.function }}</h4>
-              <h3>{{ speech.speaker.name }}</h3>
-            </div>
-            <div class="speech-background">
-              <p>{{ speech.background }}</p>
-            </div>
+            <h4>{{ speech.speaker.function }}</h4>
+            <h3>{{ speech.speaker.name }}</h3>
           </div>
-          <hr />        
+          
+          <div class="speech-background">
+            <p>{{ speech.background }}</p>
+          </div>
+
           <div class="cabinet">
             <h4>ekipa rządząca</h4>
-            <h3 class="cabinet-name">{{ speech.cabinet.name }}</h3>
+            <h3>{{ speech.cabinet.name }}</h3>
           </div>
-        </div>
-        <hr />
-        <div class="sources">
-          <p>{% if sources %}Pełny tekst przemówienia: {% for source in sources %}
-            <a href="{{ source.url }}">{{ source.name }}</a>{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}{% endif %}</p>
-        </div>
+          
+          {% if sources %} <div class="sources">
+          {% for source in sources %}<a href="{{ source.url }}">{{ source.name }}</a>{% if not forloop.last %},
+          {% else %}{% endif %}{% endfor %}{% endif %}
+        </div><!-- metainfo end -->
 {% endblock %}

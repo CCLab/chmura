@@ -17,10 +17,16 @@ class Lemma (models.Model):
 class Ignore (models.Model):
   'Words to be ignored.'
   lemma = models.ForeignKey(Lemma, unique=True)
+
+  def __unicode__ (self):
+    return self.lemma.word
    
 class Dict (models.Model):
   lemma = models.ForeignKey (Lemma)
   word = models.TextField (null=False, unique=True)
+
+  def __unicode__ (self):
+    return self.word + u": " + self.lemma.word
    
 class Word (models.Model):
   '''
