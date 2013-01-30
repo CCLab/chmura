@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     (r'^api/words/(?P<speech_id>\d+)/$', 'chmura.word.views.api_count'),
     (r'^word/(?P<object_id>\d+)/$', 'chmura.word.views.word'),    
+    (r'^word/cache/$', 'chmura.word.views.cache'),
     
     (r'^year/(?P<object_id>\d+)/(?P<width>\d)/$', 'chmura.word.views.year'),    
 

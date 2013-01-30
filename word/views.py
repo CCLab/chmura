@@ -7,7 +7,7 @@ from django.http import HttpResponse as HTTPResponse
 from django.template import Context, RequestContext, loader, Template
 from django.shortcuts import get_object_or_404
 
-from models import Word, Lemma, Ignore, Compound
+from models import Word, Lemma, Ignore, Compound, Stat
 from chmura.speech.models import Speech
 
 ### utility function
@@ -80,4 +80,23 @@ def year (request, object_id, width=3):
   template = loader.get_template("year.html")
   
   return HTTPResponse(template.render(Context(dict(speeches=result, width=width))))
+
+def cache (request):    
+
+  speeches = Speech.objects.all()
+  
+  for speech in speeches:
+    count = word_count(speech.id)
+
+    
+    for item in count:
+    
+      stat, created = Stat.objects.get_or_create(speech=speech, lemma=item[0], count=item[1])
+      
+      if created:
+        stat.save()
+        print stat
+
+  return HTTPResponse()
+    
     

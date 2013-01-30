@@ -63,4 +63,14 @@ class Compound (models.Model):
   
     return self.lemma.word
   
+
+class Stat (models.Model):
+
+  speech = models.ForeignKey (Speech)
+  lemma = models.ForeignKey (Lemma)
+  count = models.IntegerField ()
+
+  def __unicode__ (self):
   
+    return "%s (%s): %d" % ( self.lemma.word, self.speech.date.year, self.count )
+    
