@@ -17,8 +17,6 @@ def word_count (speech_id):
   compound_starts = Compound.objects.filter(first__exact=True)
   compound_lemmas = Lemma.objects.filter(id__in=compound_starts.values_list('lemma', flat=True))
 
-  print compound_lemmas
-
   words = Word.objects.exclude(lemma__id__in=Ignore.objects.all().values_list('lemma',flat=True)).filter(speech__exact=speech_id)
   
   lemmas = (set ( [ word.lemma for word in words ] ))
@@ -27,7 +25,7 @@ def word_count (speech_id):
   
   for lemma in lemmas:
   
-    count = Word.objects.filter(lemma__exact=lemma).count()
+    count = words.filter(lemma__exact=lemma).count()
     
     result.append((lemma, count))
     
@@ -86,8 +84,13 @@ def cache (request):
   speeches = Speech.objects.all()
   
   for speech in speeches:
-    count = word_count(speech.id)
 
+#    lemmas =  Lemma.objects.filter(id__in=[ w[0] for w in Word.objects.filter(speech=speech).values_list('lemma')])
+    
+ #   for lemma in lemmas:
+  #    count = Word.objects.filter(lemma__exact=lemma, speech_exact=speech).
+    
+    count = word_count(speech.id)
     
     for item in count:
     

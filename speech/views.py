@@ -30,18 +30,19 @@ def speech(request, object_id):
 
   result = dict ( speech=speech, years=years, sources=sources if sources else None )
   
-  counted = Stat.objects.filter(speech__exact=speech).order_by('count')
-  
+  counted = Stat.objects.filter(speech__exact=speech).order_by('-count')
   if counted:
     words = counted [:NUMWORDS]
-    max = counted.aggregate(Max('count'))
+    max = float(counted.aggregate(Max('count'))['count__max'])
+    print max
+
+    f = [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.')) for s in words ]
+    print f
+    result ['word_count'] = f
   else:
-    words = []
-    max = 0
+    result ['word_count'] = []          
 
-  result ['word_count'] = [ (s.lemma.word, str((float(s.count)/max)*5)) for s in words ]
-    
-  template = loader.get_template("speech.html")    
+  template = loader.get_template("speech.html")
   context = Context(result)
-
+                            
   return HTTPResponse(template.render(context))

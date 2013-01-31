@@ -1,8 +1,7 @@
 {% extends "page.html" %}{% block content %}
-        <div class="cloud" id="cloud">{% with word_count.0.1 as max_words %}{% for word in word_count %}
+        <div class="cloud" id="cloud">{% for word in word_count %}
           <span style="font-size: {{ word.1 }}em;">{{ word.0 }}</span>{% if not forloop.last %}{% endif %}{% endfor %}</p>
-        </div>{% endwith %}
-
+        </div>
         <div class="metainfo">
           <h2>{{ speech.date.year }}</h2>      
              
