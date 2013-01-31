@@ -4,7 +4,9 @@ import datetime
 
 from models import Speech, Source, Speaker
 
-from chmura.word.views import word_count
+# from chmura.word.views import word_count
+
+from chmura.word.models import Stat
 
 #from django.template import Context, RequestContext, loader, Template
 
@@ -12,7 +14,7 @@ from django.template import Context, loader
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse as HTTPResponse
 #from django.db.models import Avg, Max, Min, Count
-#from django.db.models import Max, Min
+from django.db.models import Max, Min
 
 def speech(request, object_id):
   '''
@@ -28,16 +30,17 @@ def speech(request, object_id):
 
   result = dict ( speech=speech, years=years, sources=sources if sources else None )
   
-  counted = word_count (object_id)
+  counted = Stat.objects.filter(speech__exact=speech).order_by('count')
   
   if counted:
     words = counted [:NUMWORDS]
-    max = counted [0][1]
+    max = counted.aggregate(Max('count'))
   else:
     words = []
     max = 0
-  result ['word_count'] = [ (item[0], str((float(item[1])/max)*5)) for item in words]
-  
+
+  result ['word_count'] = [ (s.lemma.word, str((float(s.count)/max)*5)) for s in words ]
+    
   template = loader.get_template("speech.html")    
   context = Context(result)
 
