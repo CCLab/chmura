@@ -90,6 +90,36 @@ def year (request, object_id, width=3):
   
   return HTTPResponse(template.render(Context(result)))
 
+
+def context(request, speech_id, lemma_id):
+ 
+  WIDTH = 5
+
+  words = Word.objects.filter(speech__exact=speech_id, lemma__exact=lemma_id).order_by('id')
+  
+  context, result, prev = [], [], []
+  for w in words:
+    p = w
+    for i in xrange(WIDTH):
+      p = p.prev
+      prev.append(p)
+      
+    prev.reverse()
+    
+    context = prev
+    context.append(w)
+    n = w
+    for i in xrange(WIDTH):
+      n = w.next
+      context.append(n)
+      
+    result.append(tuple(context))
+      
+  template = loader.get_template("context.html")
+  return HTTPResponse(template.render(Context(context=context)))
+
+###
+
 def cache (request):    
 
   'trigger this view after uploading new speech to update stats cache'
@@ -107,4 +137,6 @@ def cache (request):
 
   return HTTPResponse()
     
+
+
     
