@@ -1,0 +1,12 @@
+
+
+{% for item in counts %}
+
+<p>{{ item.0 }}, {{ item.1 }}</p>{% endfor %}
+
+
+<div class="metainfo">
+  <h2>{{ word }}</h2>
+  <p>we wszystkich przemówieniach słowo wystąpiło</p>
+  <h3>{{ sum }} raz{% if sum != "1" %}y{% endif %}</h3>
+</div>

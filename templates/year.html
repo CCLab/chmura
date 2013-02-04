@@ -1,7 +1,12 @@
-{% extends "page.html" %}{% block content %}      <div class="axis-horizontal">{% for s in speeches %}{{ s.0 }}{% endfor %}</div>
-       <div class="">{% for s in speeches %}
-         <div class="word-column">{% for w in s.1 %}{% with w.0.id as oid %}
-           <a href="{% url chmura.word.views.word object_id=oid %}">{{ w.0 }}</a>({{ w.1 }})<br />{% endwith %}{% endfor %}
+{% extends "page.html" %}{% block content %}      <div class="axis-horizontal">{% for s in speeches %}{{ s.date.year }}{% endfor %}</div>
+       <div class="">{% for year in array %}
+         <div class="word-column" style="display: table; width: 100%;">
+           <p>{{ year.0 }}
+           <div class="cloud" id="cloud" style="display:table-cell; width: 10em;">
+             <ul>{% for stat in year.1 %}
+                <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.1 }}em;">
+                  <a href="{# url chmura.word.views.word object_id=stat.lemma.id #}">{{ stat.0 }}</span></a>({{ stat.2 }})</li>{% endfor %}
+             </ul>
          </div>{% endfor %}
        </div>
 {% endblock content %}
