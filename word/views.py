@@ -6,11 +6,12 @@ from operator import itemgetter
 from django.http import HttpResponse as HTTPResponse
 from django.template import Context, RequestContext, loader, Template
 from django.shortcuts import get_object_or_404
-
+from django.db.models import Max
 from models import Word, Lemma, Ignore, Compound, Stat
 from chmura.speech.models import Speech
 
 ### utility function
+# THIS IS NOT A VIEW
 
 def word_count (speech_id):
 
@@ -32,14 +33,17 @@ def word_count (speech_id):
   result.sort(key=itemgetter(1)) 
   result.reverse()
 
-#  print result
-
   return result
+
+def normalize_stat_queryset (qs):
+
+   max = float(qs.aggregate(Max('count'))['count__max'])
+   return  [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.'), s.count) for s in qs ]
   
 ### views
 
 def api_count (request, speech_id):
-  
+  'returns lemma count dictionary of the specified speech, recounted'  
   return HTTPResponse (Context(unicode(json.dumps(word_count(speech_id)[:20],
                        ensure_ascii=False))))              
                        
@@ -49,51 +53,54 @@ def word (request, object_id):
   '''
 
   lemma = get_object_or_404(Lemma, pk=object_id)
-  
-  words = Word.objects.filter(lemma__exact=lemma)
-  
-#  dates = Speech.objects.filter(id__in=words.values_list('speech',flat=True)).values_list('date',flat=True).order_by('date')
-  speeches = Speech.objects.filter(id__in=words.values_list('speech',flat=True)).order_by('date')
+  stats = Stat.objects.filter(lemma__exact=lemma)
+  speeches = Speech.objects.all().order_by('-date')
+
+  print stats
   
   result = []
+  
   for speech in speeches:
-    count = words.filter(speech__exact=speech).count()
-    
-    result.append((speech, count))
-   
+    count = Stat.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
+    result.append ((speech.date.year, count))
+
   template = loader.get_template("word.html")
   
-  return HTTPResponse(template.render(Context(dict(speech_list=result,
-                      word=lemma.word, sum=words.count()))))
+  return HTTPResponse(template.render(Context(dict(counts = result))))
   
 
 def year (request, object_id, width=3):
 
+  NUMWORDS=20
+
+  'year comparison views'
+
   speech = get_object_or_404 (Speech, pk=object_id)
-  
   speeches = Speech.objects.filter(date__gte=speech.date)[:int(width)]
+  stats = Stat.objects.filter(speech__in=speeches)
   
-  result = [ (s.date.year, word_count(s.id)) for s in speeches ]
+  array = []
+    
+  for speech in speeches:
   
+    words = stats.filter(speech__exact=speech).order_by('-count')
+    array.append( ( speech.date.year, normalize_stat_queryset(words[:NUMWORDS])) )
+
+  result = dict(array=array)
   template = loader.get_template("year.html")
   
-  return HTTPResponse(template.render(Context(dict(speeches=result, width=width))))
+  return HTTPResponse(template.render(Context(result)))
 
 def cache (request):    
 
+  'trigger this view after uploading new speech to update stats cache'
+  
   speeches = Speech.objects.all()
   
   for speech in speeches:
-
-#    lemmas =  Lemma.objects.filter(id__in=[ w[0] for w in Word.objects.filter(speech=speech).values_list('lemma')])
-    
- #   for lemma in lemmas:
-  #    count = Word.objects.filter(lemma__exact=lemma, speech_exact=speech).
-    
     count = word_count(speech.id)
     
     for item in count:
-    
       stat, created = Stat.objects.get_or_create(speech=speech, lemma=item[0], count=item[1])
       
       if created:
