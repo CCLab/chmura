@@ -1,7 +1,11 @@
 # Django settings for chmura project.
 
+import os 
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_DIR = (lambda p:'/'.join(p.split('/')[:-1]))(os.path.abspath(__file__))
 
 ADMINS = (
      ('Alex', 'aurbanowicz@centrumcyfrowe.pl'),
@@ -48,7 +52,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/home/alex/chmura/static'
+MEDIA_ROOT = os.path.join(PROJECT_DIR,'/static')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -81,7 +85,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'chmura.urls'
 
 TEMPLATE_DIRS = (
-    '/home/alex/chmura/templates',
+    os.path.join(PROJECT_DIR,'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
