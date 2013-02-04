@@ -35,10 +35,11 @@ def word_count (speech_id):
 
   return result
 
+### NOT A VIEW EITHER
 def normalize_stat_queryset (qs):
 
    max = float(qs.aggregate(Max('count'))['count__max'])
-   return  [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.'), s.count) for s in qs ]
+   return  [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.'), s.count, s.lemma.id) for s in qs ]
   
 ### views
 
@@ -56,8 +57,6 @@ def word (request, object_id):
   stats = Stat.objects.filter(lemma__exact=lemma)
   speeches = Speech.objects.all().order_by('-date')
 
-  print stats
-  
   result = []
   
   for speech in speeches:
@@ -105,7 +104,6 @@ def cache (request):
       
       if created:
         stat.save()
-        print stat
 
   return HTTPResponse()
     

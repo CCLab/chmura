@@ -34,10 +34,7 @@ def speech(request, object_id):
   if counted:
     words = counted [:NUMWORDS]
     max = float(counted.aggregate(Max('count'))['count__max'])
-    print max
-
-    f = [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.')) for s in words ]
-    print f
+    f = [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.'), s.lemma.id) for s in words ]
     result ['word_count'] = f
   else:
     result ['word_count'] = []          
