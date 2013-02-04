@@ -6,6 +6,7 @@ from operator import itemgetter
 from django.http import HttpResponse as HTTPResponse
 from django.template import Context, RequestContext, loader, Template
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from models import Word, Lemma, Ignore, Compound, Stat
 from chmura.speech.models import Speech
@@ -79,6 +80,8 @@ def year (request, object_id, width=3):
   
   return HTTPResponse(template.render(Context(dict(speeches=result, width=width))))
 
+
+@login_required
 def cache (request):    
 
   speeches = Speech.objects.all()
@@ -101,5 +104,3 @@ def cache (request):
         print stat
 
   return HTTPResponse()
-    
-    
