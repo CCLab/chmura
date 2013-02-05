@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
+    (r'^$', 'chmura.speech.views.main'),
     (r'^api/words/(?P<speech_id>\d+)/$', 'chmura.word.views.api_count'),
     (r'^word/(?P<object_id>\d+)/$', 'chmura.word.views.word'),    
     (r'^word/cache/$', 'chmura.word.views.cache'),
