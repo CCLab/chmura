@@ -1,11 +1,11 @@
-{% extends "page.html" %}{% block content %}<div class="stats-box">{% for item in counts %}
-
-<p>{{ item.0.date.year }}, {{ item.1 }}</p>{% endfor %}
-</div>
-
-<div class="metainfo">
-  <h2>{{ word }}</h2>
-  <h4>we wszystkich przemówieniach słowo wystąpiło</h4>
-  <h3>{{ sum }} raz{% if sum != "1" %}y{% endif %}</h3>
-</div>
+{% extends "page.html" %}{% block content %}
+    <div class="yearcount">
+      <ul>{% for item in counts %}
+        <li>{{ item.1 }}</li>{% endfor %}
+    </div>
+   <div class="metainfo">
+     <h2>{{ word }}</h2>
+     <h4>we wszystkich przemówieniach słowo wystąpiło</h4>
+     <h3>{{ sum }} raz{% if sum != "1" %}y{% endif %}</h3>
+   </div>
 {% endblock %}

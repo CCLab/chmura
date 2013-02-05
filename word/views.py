@@ -61,16 +61,17 @@ def word (request, object_id):
   speeches = Speech.objects.all().order_by('-date')
   sum = 0
   result = []
-  
+  years = []  
   for speech in speeches:
     count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
     result.append ((speech, count))
+    years.append(speech)
     sum = sum+count
 
   template = loader.get_template("word.html")
   
   return HTTPResponse(template.render(Context({'counts':result,'yearsactive':'active',
-    'speechactive':'off', 'sum': sum, 'word': lemma.word })))
+    'speechactive':'off', 'sum': sum, 'word': lemma.word, 'years': years })))
   
 
 def year (request, object_id, width=3):

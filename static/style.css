@@ -79,6 +79,14 @@ div.yearlist ul {
 	left:40px;
 }
 
+div.yearcount ul {
+	font-size:20px;
+	list-style-type:none;
+	float: left;
+	position:relative;
+	left:40px;
+}
+
 div.yearlist ul li { }
 div.yearlist ul li a { color: #aaa; }
 div.yearlist ul li a:hover { color: #000; font-weight:bold;}
