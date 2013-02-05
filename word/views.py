@@ -59,16 +59,18 @@ def word (request, object_id):
   lemma = get_object_or_404(Lemma, pk=object_id)
   stats = Stat.objects.filter(lemma__exact=lemma)
   speeches = Speech.objects.all().order_by('-date')
-
+  sum = 0
   result = []
   
   for speech in speeches:
-    count = Stat.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
-    result.append ((speech.date.year, count))
+    count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
+    result.append ((speech, count))
+    sum = sum+count
 
   template = loader.get_template("word.html")
   
-  return HTTPResponse(template.render(Context(dict(counts = result))))
+  return HTTPResponse(template.render(Context({'counts':result,'yearsactive':'active',
+    'speechactive':'off', 'sum': sum, 'word': lemma.word })))
   
 
 def year (request, object_id, width=3):
@@ -88,7 +90,7 @@ def year (request, object_id, width=3):
     words = stats.filter(speech__exact=speech).order_by('-count')
     array.append( ( speech.date.year, normalize_stat_queryset(words[:NUMWORDS])) )
 
-  result = dict(array=array)
+  result = {'array': array, 'yearsactive': 'active', 'speechactive': 'off'}
   template = loader.get_template("year.html")
   
   return HTTPResponse(template.render(Context(result)))

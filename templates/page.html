@@ -10,8 +10,8 @@
     <h1>Polski budżet w słowach</h1>
     <div class="navi-tabs group">
       <ul>
-        <li><a href="{% url chmura.speech.views.speech object_id=1 %}" id="active">Przemówienia</a></li>
-        <li><a href="{% url chmura.word.views.year object_id=4, width=3 %}">Słowa przez lata</a></p></li>
+        <li><a href="{% url chmura.speech.views.speech object_id=1 %}" id="{{ speechactive }}">Przemówienia</a></li>
+        <li><a href="{% url chmura.word.views.year object_id=4, width=3 %}" id="{{ yearsactive }}">Słowa przez lata</a></p></li>
       </ul>
     </div><!-- navi-tabs end -->
 {% if years %} 

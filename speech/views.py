@@ -31,7 +31,8 @@ def speech(request, object_id):
   years = Speech.objects.all().order_by('-date')
   sources = Source.objects.filter(speech__exact=speech).order_by('name')
 
-  result = dict ( speech=speech, years=years, sources=sources if sources else None )
+  result = dict ( speech=speech, years=years, speechactive='active', yearsactive='off',
+    sources=sources if sources else None )
   
   counted = Stat.objects.filter(speech__exact=speech).order_by('-count')
   if counted:
