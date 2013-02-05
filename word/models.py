@@ -44,6 +44,9 @@ class Word (models.Model):
   speech = models.ForeignKey (Speech)
   word = models.TextField (blank=False)
   display = models.TextField (null=False)  
+  
+  def __unicode__ (self):
+    return self.word
    
   
 #class Words (models.Model):

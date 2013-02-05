@@ -94,6 +94,38 @@ def year (request, object_id, width=3):
   return HTTPResponse(template.render(Context(result)))
 
 
+def context(request, speech_id, lemma_id):
+ 
+  WIDTH = 4
+
+  lemma = get_object_or_404 (Lemma, pk=lemma_id)
+  words = Word.objects.filter(speech__exact=speech_id, lemma__exact=lemma_id).order_by('id')
+  
+  result = []
+  for w in words:
+    context, prev = [], []
+    p = w
+    for i in xrange(WIDTH):
+      p = p.prev
+      prev.append(p)
+      
+    prev.reverse()
+    context = prev
+    context.append(w)
+    n = w
+    for i in xrange(WIDTH):
+      n = n.next
+      context.append(n)
+
+    result.append(tuple(context))
+
+  template = loader.get_template("context.html")
+  
+  return HTTPResponse(template.render(Context(dict(context=result, 
+    count=words.count(), word=lemma))))
+
+###
+
 @login_required
 def cache (request):    
 

@@ -1,0 +1,4 @@
+{% for c in context %}
+<p>{% for word in c %}
+<a href="{% url chmura.word.views.word object_id=word.lemma.id %}">{{ word.word }}</a>
+{% endfor %}</p>{% endfor %}

@@ -7,13 +7,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-
-    (r'^accounts/', include('django.contrib.auth.urls')),
     (r'^api/words/(?P<speech_id>\d+)/$', 'chmura.word.views.api_count'),
+
     (r'^word/(?P<object_id>\d+)/$', 'chmura.word.views.word'),    
-   
     (r'^word/cache/$', 'chmura.word.views.cache'),
- 
+    (r'^word/context/(?P<speech_id>\d+)/(?P<lemma_id>\d+)/?$', 'chmura.word.views.context'),
+    
     (r'^year/(?P<object_id>\d+)/(?P<width>\d)/$', 'chmura.word.views.year'),    
 
     # Example:
@@ -24,6 +23,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    
+    (r'^accounts/', include('django.contrib.auth.urls')),    
     
 )
 
