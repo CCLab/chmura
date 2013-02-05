@@ -13,8 +13,11 @@ from chmura.word.models import Stat
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse as HTTPResponse
+from django.http import HttpResponseRedirect as HTTPResponseRedirect
 #from django.db.models import Avg, Max, Min, Count
 from django.db.models import Max, Min
+
+from django.core.urlresolvers import reverse
 
 def speech(request, object_id):
   '''
@@ -43,3 +46,12 @@ def speech(request, object_id):
   context = Context(result)
                             
   return HTTPResponse(template.render(context))
+
+def main(request):
+
+  'main page view'
+  
+  speech = Speech.objects.all().order_by('-date')[0]
+  
+  return HTTPResponseRedirect(reverse('chmura.speech.views.speech', kwargs={'object_id':speech.id}))
+  
