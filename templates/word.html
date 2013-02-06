@@ -1,7 +1,10 @@
 {% extends "page.html" %}{% block content %}
+
     <div class="yearcount">
       <ul>{% for item in counts %}
-        <li>{{ item.1 }}</li>{% endfor %}
+        <li>
+          <div class="chartbar" style="width: {{ item.1 }}em;">&nbsp;</div>{{ item.1 }}</li>{% endfor %}
+      </ul>
     </div>
    <div class="metainfo">
      <h2>{{ word }}</h2>

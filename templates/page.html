@@ -4,14 +4,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
   <head>
     <title>Polski budżet w słowach</title>
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
   </head>
   <body>
     <h1>Polski budżet w słowach</h1>
     <div class="navi-tabs group">
       <ul>
         <li><a href="{% url chmura.speech.views.speech object_id=1 %}" id="{{ speechactive }}">Przemówienia</a></li>
-        <li><a href="{% url chmura.word.views.year object_id=4, width=3 %}" id="{{ yearsactive }}">Słowa przez lata</a></p></li>
+        <li><a href="{% url chmura.word.views.year object_id=4, width=3 %}" id="{{ yearsactive }}">Słowa przez lata</a></li>
       </ul>
     </div><!-- navi-tabs end -->
 {% if years %} 

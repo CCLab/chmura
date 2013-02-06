@@ -174,3 +174,8 @@ div.sources {
 }
 
 div.sources a { color: #e16f1e; font-weight:bold;}
+
+div.chartbar { display: inline-block; background: Sienna; 
+               height: 18px; float: left; border: thin solid #e16f1e; 
+               margin-right: 1em; margin-top:3px; 
+}

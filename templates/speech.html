@@ -3,26 +3,24 @@
           <span style="font-size: {{ word.1 }}em;">{{ word.0 }}</span>{% if not forloop.last %}{% endif %}{% endfor %}</p>
         </div>
         <div class="metainfo">
-          <h2>{{ speech.date.year }}</h2>      
-             
-          <div class="speaker">
-            <img src="{{ speech.speaker.head.url }}" id="head" class="head" 
-              alt="{{ speech.speaker.name }}: portret" /> 
-            <h4>{{ speech.speaker.function }}</h4>
-            <h3>{{ speech.speaker.name }}</h3>
-          </div>
-          
-          <div class="speech-background">
-            <p>{{ speech.background }}</p>
-          </div>
-
+          <div class="metabox">
+            <h2>{{ speech.date.year }}</h2>                 
+            <div class="speaker">
+              <img src="{{ speech.speaker.head.url }}" id="head" class="head" 
+                alt="{{ speech.speaker.name }}: portret" /> 
+              <h4>{{ speech.speaker.function }}</h4>
+              <h3>{{ speech.speaker.name }}</h3>
+            </div>
+            <div class="speech-background">
+              <p>{{ speech.background }}</p>
+            </div>
+          </div><!-- metabox end -->
           <div class="cabinet">
             <h4>ekipa rządząca</h4>
             <h3>{{ speech.cabinet.name }}</h3>
           </div>
-          
-          {% if sources %} <div class="sources">
-          {% for source in sources %}<a href="{{ source.url }}">{{ source.name }}</a>{% if not forloop.last %},
-          {% else %}{% endif %}{% endfor %}{% endif %}
+          {% if sources %}<div class="sources">{% for source in sources %}
+            <a href="{{ source.url }}">{{ source.name }}</a>{% if not forloop.last %}, {% else %}{% endif %}{% endfor %}
+          </div>{% endif %}
         </div><!-- metainfo end -->
 {% endblock %}
