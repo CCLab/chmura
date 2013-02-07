@@ -39,11 +39,15 @@ def word_count (speech_id):
   return result
 
 ### NOT A VIEW EITHER
+
+
 def normalize_stat_queryset (qs):
 
    max = float(qs.aggregate(Max('count'))['count__max'])
    return  [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.'), s.count, s.lemma.id) for s in qs ]
   
+
+
 ### views
 
 def api_count (request, speech_id):
@@ -56,18 +60,24 @@ def word (request, object_id):
   WARNING: the Word model may contain only one copy of each Speech text for this to work!
   '''
 
+  WIDTH = 20
+  
   lemma = get_object_or_404(Lemma, pk=object_id)
   stats = Stat.objects.filter(lemma__exact=lemma)
   speeches = Speech.objects.all().order_by('-date')
   sum = 0
-  result = []
+  counts = []
   years = []  
+  
   for speech in speeches:
     count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
-    result.append ((speech, count))
+    counts.append ((speech, count))
     years.append(speech)
     sum = sum+count
-
+    
+  m = max([ int(item[1]) for item in counts ] )
+  result = [ (item[0], item[1], str((float(item[1])/m)*WIDTH)) for item in counts ]
+  
   template = loader.get_template("word.html")
   
   return HTTPResponse(template.render(Context({'counts':result,'yearsactive':'active',

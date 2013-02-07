@@ -1,13 +1,16 @@
-{% extends "page.html" %}{% block content %}      <div class="axis-horizontal">{% for s in speeches %}{{ s.date.year }}{% endfor %}</div>
-       <div class="">{% for year in array %}
-         <div class="word-column" style="display: table; width: 100%;">
-           <p>{{ year.0 }}
-           <div class="cloud" id="cloud" style="display:table-cell; width: 10em;">
+{% extends "page.html" %}{% block content %}
+       <div class="years-table" style="display:table;">
+         <div class="years-row" style="display:table-row;">{% for year in array %}
+           <div class="year-head" style="display:table-cell;text-align:center;">
+             <h5>{{ year.0 }}</h5>
+           </div>{% endfor %}
+         </div>  
+         <div class="cloud-row" style="display: table-row;">{% for year in array %}
+           <div class="cloud-cell" style="display: table-cell; width: 25em;">
              <ul>{% for stat in year.1 %}
-               <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.1 }}em;">
-                 <a href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</span></a>({{ stat.2 }})</li>{% endfor %}
+               <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.2 }}em;">
+                 <a href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</a></span>&nbsp;&nbsp;<sup>({{ stat.2 }})</sup></li>{% endfor %}
              </ul>
-           </div>
          </div>{% endfor %}
        </div>
 {% endblock content %}

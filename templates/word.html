@@ -2,11 +2,11 @@
 
     <div class="yearcount">
       <ul>{% for item in counts %}
-        <li>
-          <div class="chartbar" style="width: {{ item.1 }}em;">&nbsp;</div>{{ item.1 }}</li>{% endfor %}
+        <li class="barchart">
+          <div class="chartbar" style="width: {{ item.2 }}em;">&nbsp;</div>{{ item.1 }}</li>{% endfor %}
       </ul>
     </div>
-   <div class="metainfo">
+   <div class="metadata">
      <h2>{{ word }}</h2>
      <h4>we wszystkich przemówieniach słowo wystąpiło</h4>
      <h3>{{ sum }} raz{% if sum != "1" %}y{% endif %}</h3>

@@ -92,6 +92,7 @@ div.yearlist ul li a { color: #aaa; }
 div.yearlist ul li a:hover { color: #000; font-weight:bold;}
 div.yearlist ul li a:active { color: #aaa; }
 
+div.yearlist ul li.barchart { width: 35em; }
 
 div.main {
 	background-color: #fff;
@@ -125,6 +126,22 @@ div.metainfo {
 	
 }
 div.metainfo h2 {
+	font-size:60px;
+	font-weight: lighter;
+	color: #e16f1e;
+	margin-bottom: 10px;
+}
+
+div.metadata {
+	margin-top:0px;
+	margin-left:20px;
+	width: 80%;
+        min-width: 500px;
+	border-top: none;
+	padding: 20px 20px 20px 10px; 
+	
+}
+div.metadata h2 {
 	font-size:60px;
 	font-weight: lighter;
 	color: #e16f1e;
