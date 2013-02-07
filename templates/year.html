@@ -4,9 +4,10 @@
            <p>{{ year.0 }}
            <div class="cloud" id="cloud" style="display:table-cell; width: 10em;">
              <ul>{% for stat in year.1 %}
-                <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.1 }}em;">
-                  <a href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</span></a>({{ stat.2 }})</li>{% endfor %}
+               <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.1 }}em;">
+                 <a href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</span></a>({{ stat.2 }})</li>{% endfor %}
              </ul>
+           </div>
          </div>{% endfor %}
        </div>
 {% endblock content %}
