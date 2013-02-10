@@ -8,7 +8,7 @@
          <div class="cloud-row" style="display: table-row;">{% for year in array %}
            <div class="cloud-cell" style="display: table-cell; width: 25em;">
              <ul>{% for stat in year.1 %}
-               <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.2 }}em;">
+               <li style="list-style-type: none; width:100%; text-align:center;"><span style="font-size: {{ stat.1 }}em;">
                  <a href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</a></span>&nbsp;&nbsp;<sup>({{ stat.2 }})</sup></li>{% endfor %}
              </ul>
          </div>{% endfor %}

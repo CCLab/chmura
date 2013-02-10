@@ -76,8 +76,12 @@ div.yearlist ul {
 	list-style-type:none;
 	float: left;
 	position:relative;
-	left:40px;
-        margin-top:20px;
+	left:50px;
+        margin-top:25px;
+}
+
+div.yearcount {
+margin-top:25px;
 }
 
 div.yearcount ul {
@@ -86,15 +90,22 @@ div.yearcount ul {
 	float: left;
 	position:relative;
 	left:-15px;
-        margin-top:20px;
+margin-bottom:25px;
 }
 
-div.yearlist ul li { }
+div.yearlist ul li { 
+/*border:1px solid #ccc; 
+padding:0 5px;*/
+}
+
 div.yearlist ul li a { color: #aaa; }
 div.yearlist ul li a:hover { color: #000; font-weight:bold;}
 div.yearlist ul li a:active { color: #aaa; }
 
-div.yearlist ul li.barchart { width: 35em; }
+div.yearlist ul li.barchart {
+	width: 35em;
+clear:right;
+}
 
 div.main {
 	background-color: #fff;
@@ -105,7 +116,7 @@ div.main {
 }
 
 .cloud {
-	padding: 40px 60px;
+	padding: 20px 40px;
 	width:80%;
 	min-width: 800px;
 }
@@ -119,21 +130,31 @@ div.main {
 img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
 
 div.metainfo {
+display:table;
 	margin-top:40px;
-	margin-left:20px;
+	margin-left:10px;
 	width: 80%;
         min-width: 500px;
 	border-top: 1px solid #ccc;
-	padding: 20px 20px 20px 10px; 
+	padding: 0px 10px 10px 0px; 
 	
 }
 div.metainfo h2 {
+display:table-row;
 	font-size:60px;
 	font-weight: lighter;
 	color: #e16f1e;
 	margin-bottom: 10px;
 }
 
+div#twarz {
+display:table;
+width:100%;
+margin-bottom:20px;
+margin-top:10px;
+}
+
+/*****************************************/
 div.metadata {
 	margin-top:0px;
 	margin-left:20px;
@@ -150,9 +171,14 @@ div.metadata h2 {
 	margin-bottom: 10px;
 }
 
+/*****************************************/
+
 div.speaker {
-	float:left;
+display:table-cell;
+vertical-align:top;
+	/*float:left;*/
 	width: 50%;
+min-height: 160px;
 	margin-bottom:20px;
 }
 
@@ -164,7 +190,9 @@ div.speaker img {
 .speaker h3, .cabinet h3 {
         font-size: 30px;
         font-weight: lighter;
+width:400px;
 }
+
 .speaker h4, .cabinet h4 {
 	font-size: 20px;
 	font-style: italic;
@@ -172,19 +200,20 @@ div.speaker img {
 }
 
 div.speech-background {
+display:table-cell;
+vertical-align:top;
 	width: 49%;
-	float:right;
+/*	float:right;*/
 	clear: right;
 	font-size: small;
 	font-style: italic;
 }
 
 div.cabinet {
+	border-top: 1px solid #ccc;
 	clear: both;
 	width:100%;
-	border-top: 1px solid #ccc;
-	padding: 20px 0;
-
+	padding: 10px 0;
 }
 div.sources {
 	padding: 20px 0;
@@ -198,3 +227,34 @@ div.chartbar { display: inline-block; background: Sienna;
                height: 18px; float: left; border: thin solid #e16f1e; 
                margin-right: 1em; margin-top:3px; 
 }
+
+/************** popup ****************/
+#popup {
+position:absolute;
+z-index: 42;
+width:80%;
+border:1px solid gray;
+margin: 40px;
+padding: 5px 10px 0 10px;
+height:250px;
+overflow-y: scroll;
+background-color: white;
+box-shadow: 0 5px 15px #ccc;
+}
+
+#popup p { margin-bottom:1em; }
+#popup p a { color: #000; }
+#popup p a:hover { color: #e16f1e; }
+#popup p a:active { color: #e16f1e; }
+#popup p a:visited { }
+
+#popup p a.wskazany { font-weight: bold; color: #e16f1e; }
+
+/************** end popup ****************/
+
+/************** słowa przez lata ****************/
+.years-table { margin:40px; }
+.years-row {
+border-top: 2px solid gray;
+}
+
