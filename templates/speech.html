@@ -1,6 +1,6 @@
 {% extends "page.html" %}{% block content %}
         <div class="cloud" id="cloud">{% for word in word_count %}
-          <span onclick="context_popup({{ speech.id }},{{ word.2}})" style="font-size: {{ word.1 }}em;">{{ word.0 }}</span>{% if not forloop.last %}{% endif %}{% endfor %}</p>
+          <span title="kliknij, żeby zobaczyć kontekst" onclick="context_popup({{ speech.id }},{{ word.2}})" style="font-size: {{ word.1 }}em;">{{ word.0 }}</span>{% if not forloop.last %}{% endif %}{% endfor %}</p>
         </div>
 
         <div id="popup" style="display: none;">

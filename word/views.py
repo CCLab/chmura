@@ -44,7 +44,7 @@ def word_count (speech_id):
 def normalize_stat_queryset (qs):
 
    max = float(qs.aggregate(Max('count'))['count__max'])
-   return  [ (s.lemma.word, str((float(s.count)/max)*5).replace(',','.'), s.count, s.lemma.id) for s in qs ]
+   return  [ (s.lemma.word, str((float(s.count)/max)*3).replace(',','.'), s.count, s.lemma.id) for s in qs ]
   
 
 
@@ -84,7 +84,7 @@ def word (request, object_id):
     'speechactive':'off', 'sum': sum, 'word': lemma.word, 'years': years })))
   
 
-def year (request, object_id, width=3):
+def year (request, object_id, width=4):
 
   NUMWORDS=20
 
@@ -93,6 +93,8 @@ def year (request, object_id, width=3):
   speech = get_object_or_404 (Speech, pk=object_id)
   speeches = Speech.objects.filter(date__gte=speech.date)[:int(width)]
   stats = Stat.objects.filter(speech__in=speeches)
+  prev_speech = Speech.objects.filter(date__lte=speech.date).order_by('date')[0]
+  next_speech = Speech.objects.filter(date__gte=speeches[len(speeches)].date).order_by('-date')[0]  
   
   array = []
     
@@ -101,7 +103,7 @@ def year (request, object_id, width=3):
     words = stats.filter(speech__exact=speech).order_by('-count')
     array.append( ( speech.date.year, normalize_stat_queryset(words[:NUMWORDS])) )
 
-  result = {'array': array, 'yearsactive': 'active', 'speechactive': 'off'}
+  result = {'array': array, 'yearsactive': 'active', 'speechactive': 'off', 'prev': prev_speech, 'next': next_speech}
   template = loader.get_template("year.html")
   
   return HTTPResponse(template.render(Context(result)))
@@ -112,7 +114,8 @@ def context(request, speech_id, lemma_id):
   WIDTH = 4
 
   lemma = get_object_or_404 (Lemma, pk=lemma_id)
-  words = Word.objects.filter(speech__exact=speech_id, lemma__exact=lemma_id).order_by('id')
+  speech = get_object_or_404 (Speech, pk=speech_id)
+  words = Word.objects.filter(speech__exact=speech, lemma__exact=lemma).order_by('id')
   
   result = []
   for w in words:
@@ -135,7 +138,7 @@ def context(request, speech_id, lemma_id):
   template = loader.get_template("context.html")
   
   return HTTPResponse(template.render(Context(dict(context=result, 
-    count=words.count(), word=lemma))))
+    count=words.count(), word=lemma, speech=speech))))
 
 ###
 

@@ -1,7 +1,9 @@
-* {margin:0; padding:0; border:0; text-indent:0;
-transition: all 0.2s;
--webkit-transition: all 0.2s;
--moz-transition: all 0.2s;
+* { margin:0; padding:0; border:0; text-indent:0; }
+
+a:hover,span:hover {
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        -moz-transition: all 0.1s;
 }
 
 html, body {
@@ -10,6 +12,7 @@ html, body {
 }
 
 /********** clearfix ************/
+
 .group:before,
 .group:after {
 	content: "";
@@ -21,6 +24,7 @@ html, body {
 .group {
 	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
 }
+
 /********** clearfix end ************/
 
 a { color: #000; text-decoration: none;}
@@ -29,37 +33,41 @@ h1 {
 	font-weight: lighter;
 	font-size: 60px;
 	padding: 20px 0px;
-color:#aaa;
-text-shadow:1px 1px 3px #fff;
-margin-left:150px;
+	color:#aaa;
+	text-shadow:1px 1px 3px #fff;
+	margin-left:150px;
 }
-/*
-h2 { font-size: 32px; font-weight: lighter; color: Sienna;} 
-h3 { font-weight: lighter; }
-h4 { font-style: italic; font-size: small; }
-*/
+
+div.main {
+	background-color: #fff;
+	position: relative;
+	left: 150px;
+	border: 1px solid #ccc;
+	width:80%;
+	min-width: 1000px;
+}
+
+/********** nawigacja górna ************/
 
 div.navi-tabs {}
 div.navi-tabs ul {
 	list-style-type: none;
-	height: 33px;
 	text-transform: uppercase;
 	position: relative;
 	z-index: 5;
 	left: 200px;
-	top:1px;
+	top: 1px;
 }
+
 div.navi-tabs ul li {
-	display: block; float:left;
+	float:left;
 	margin-right:10px;
 }
+
 div.navi-tabs ul li a {
 	display: block;
 	padding:5px 10px;
-	border-top:1px solid #ccc;
-	border-left:1px solid #ccc;
-	border-right:1px solid #ccc;
-	border-bottom:1px solid #ccc;
+	border:1px solid #ccc;
 	background-color: #efefef;
 }
 
@@ -68,55 +76,36 @@ div.navi-tabs ul li a#active {
 	background-color: #fff;
 }
 
-    
+/********** end nawigacja górna ************/
+
+/********** SPEECH ************/
+
+/************ nawigacja boczna **************/
+
 div.yearlist {
 	float: left;
 	position:relative;
+        text-align: center;
 }
 
 div.yearlist ul {
 	font-size:20px;
 	list-style-type:none;
-	float: left;
-	position:relative;
-	left:50px;
+	position: relative;
+	left: 50px;
         margin-top:25px;
 }
 
+div.yearlist ul li { }
+
 div.yearlist ul li.wybrany { font-weight:bold; }
 div.yearlist ul li.wybrany a { color:#e16f1e; }
-
-div.yearcount { margin-top:25px; }
-
-div.yearcount ul {
-	font-size:20px;
-	list-style-type:none;
-	float: left;
-	position:relative;
-	left:-15px;
-margin-bottom:25px;
-}
-
-div.yearlist ul li { 
-/*border:1px solid #ccc; 
-padding:0 5px;*/
-}
 
 div.yearlist ul li a { color: #aaa; }
 div.yearlist ul li a:hover { color: #000; font-weight:bold;}
 div.yearlist ul li a:active { color: #aaa; }
 
-div.yearlist ul li.barchart {
-	width: 35em; clear:right;
-}
-
-div.main {
-	background-color: #fff;
-	position: relative; left: 150px;
-	border: 1px solid #ccc;
-	width:80%;
-	min-width: 1000px;
-}
+/************ end nawigacja boczna **************/
 
 .cloud {
 	padding: 20px 40px;
@@ -124,16 +113,13 @@ div.main {
 	min-width: 800px;
 }
 
-.cloud span { margin: 0 20px 0 0; }
-.cloud span a { }
-.cloud span a:hover { color: #e16f1e; }
-.cloud span a:active { color: #e16f1e; }
-.cloud span a:visited { }
-
-img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
+.cloud span { margin: 0 20px 0 0; cursor: pointer; }
+.cloud span:hover { color: #e16f1e; }
+.cloud span:active { color: #e16f1e; }
+.cloud span:visited { }
 
 div#metainfo {
-display:table;
+	display:table;
 	margin-top:40px;
 	margin-left:10px;
 	width: 80%;
@@ -151,49 +137,31 @@ display:table-row;
 }
 
 div#twarz {
-display:table;
-width:100%;
-margin-bottom:20px;
-margin-top:10px;
+	display:table;
+	width:100%;
+	margin-bottom:20px;
+	margin-top:10px;
 }
-
-/*****************************************/
-div.metadata {
-	margin-top:0px;
-	margin-left:20px;
-	width: 80%;
-        min-width: 500px;
-	border-top: none;
-	padding: 20px 20px 20px 10px; 
-	
-}
-div.metadata h2 {
-	font-size:60px;
-	font-weight: lighter;
-	color: #e16f1e;
-	margin-bottom: 10px;
-}
-
-/*****************************************/
 
 div.speaker {
-display:table-cell;
-vertical-align:top;
-	/*float:left;*/
+	display:table-cell;
+	vertical-align:top;
 	width: 50%;
-min-height: 160px;
+	min-height: 160px;
 	margin-bottom:20px;
 }
 
-div.speaker img {
-	width:160px;
-	height:160px;
+div.speaker img.head {
+	margin-right: 30px;
+	width:160;
+	height: 160px;
+	float: left;
 }
 
 .speaker h3, .cabinet h3 {
         font-size: 30px;
         font-weight: lighter;
-width:400px;
+	width:400px;
 }
 
 .speaker h4, .cabinet h4 {
@@ -203,12 +171,10 @@ width:400px;
 }
 
 div.speech-background {
-display:table-cell;
-vertical-align:top;
+	display:table-cell;
+	vertical-align:top;
 	width: 49%;
-/*	float:right;*/
 	clear: right;
-	font-size: small;
 	font-style: italic;
 }
 
@@ -218,46 +184,28 @@ div.cabinet {
 	width:100%;
 	padding: 10px 0;
 }
+
 div.sources {
 	padding: 20px 0;
         width:50%;
 	border-top: 1px solid #ccc;
+	font-size: small;
 }
 
 div.sources a { color: #e16f1e; font-weight:bold;}
 
-div.chartbar {
-	display: inline;
-	background-color: #e16f1e; 
-	border: 1px solid #e16f1e; 
-        height: 18px;
-	float: left; 
-        margin-right: 1em;
-	margin-top:5px; 
-}
-
-li.barchart { clear:right; }
-
-li.barchart div.bar-rok {
-color:#aaa;
-display:inline;
-float:left;
-margin-left:40px;
-margin-right:25px;
-}
-
-
 /************** popup ****************/
+
 #popup {
-position:absolute;
-z-index: 42;
-width:80%;
-border:1px solid gray;
-margin: 40px;
-height:250px;
-overflow-y: scroll;
-background-color: white;
-box-shadow: 0 5px 15px #ccc;
+	position:absolute;
+	z-index: 42;
+	width:80%;
+	border:1px solid gray;
+	margin: 40px;
+	height:250px;
+	overflow-y: scroll;
+	background-color: white;
+	box-shadow: 0 5px 15px #ccc;
 }
 
 #popup p { margin:1em 1em 1em 10px; }
@@ -269,41 +217,75 @@ box-shadow: 0 5px 15px #ccc;
 #popup p a.wskazany { font-weight: bold; color: #e16f1e; }
 
 #popup #belka {
-margin:0;
-border-bottom:1px solid gray;
-text-align:right;
-text-transform:uppercase;
+	width:99%;
+	margin:0;
+	border-bottom:1px solid gray;
+	text-align:left;
+	text-transform:uppercase;
+	font-size:small;
+	padding: 0 5px;
 }
 
 #popup #belka span#belka-close {
-cursor:pointer;
-color: #e16f1e;
-font-size:x-small;
-padding: 0 5px;
+	float:right;
+	cursor:pointer;
+	color: #e16f1e;
+	font-size:x-small;
 }
 
 /************** end popup ****************/
 
-/************** słowa przez lata ****************/
-.years-table { margin:40px 20px; }
-.year-head { }
+/************** end SPEECH ****************/
+
+/************** YEAR ****************/
+
+.years-table {
+	display:table;
+	margin:40px 20px;
+}
+
+.years-row {
+	display:table-row;
+	width:100%;
+}
+
+.year-head-nav {
+        display:table-cell;
+        text-align:center;
+}
+
+.year-head-nav a {
+	font-weight:bolder;
+	color:  #e16f1e;
+}
+
+.year-head {
+	display:table-cell;
+	text-align:center;
+}
+
 .year-head h5 {
-margin: 0 20px;
-border: 1px solid #ddd;
-background-color:#eee;
+	margin: 0 20px;
+	border: 1px solid #ddd;
+	background-color:#eee;
 }
 
-/** strzałki **/
-.year-head a {
-/*display:block;
-border:1px solid #e16f1e;*/
-font-weight:bolder;
-color:  #e16f1e;
+.cloud-row {
+	display:table-row;
+	width:100%;
 }
-/** end strzałki **/
 
-.cloud-cell ul {
-margin: 0 20px;
+.cloud-cell-nav { display:table-cell; }
+
+.cloud-cell { 
+	display:table-cell;
+}
+
+.cloud-cell ul { margin: 0 20px; }
+
+.cloud-cell ul li { 
+	list-style-type: none;
+	text-align:center;
 }
 
 .cloud-cell ul li span a {}
@@ -311,4 +293,65 @@ margin: 0 20px;
 .cloud-cell ul li span a:active {}
 .cloud-cell ul li span a:visited {}
 
+/************** end YEAR ****************/
+
+/************** WORD *******************/
+
+div.yearcount { margin-top:25px; }
+
+div.yearcount ul {
+	font-size:20px;
+	list-style-type:none;
+	float: left;
+	position:relative;
+        margin-bottom:25px;
+	width:60%;
+	min-width:60%;
+	margin-left:30px;
+}
+
+li.barchart {
+	display:block;
+	clear:right;
+	margin-bottom:1px;
+}
+
+li.barchart .bar-rok {
+	color:#aaa;
+	display:inline;
+	float:left;
+	margin-right:30px;
+}
+
+li.barchart div.chartbar {
+	background-color: #e16f1e; 
+	border: 1px solid #e16f1e; 
+        height: 16px;
+	float: left; 
+        margin-right: 30px;
+	margin-top:3px; 
+}
+
+#word-metadata {
+	float:left;
+	display:relative;
+	margin-left:20px;
+	width: 30%;
+	margin-bottom: 10px;
+}
+
+#word-metadata h2 {
+	font-size:60px;
+	font-weight: lighter;
+	color: #e16f1e;
+	margin-bottom: 10px;
+}
+
+#word-metadata h3 {
+	font-size:40px;
+	font-weight: lighter;
+	color: #000;
+}
+
+/************** end WORD *******************/
 

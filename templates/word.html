@@ -7,9 +7,9 @@
           <div class="chartbar" style="width: {{ item.2 }}em;">&nbsp;</div>{{ item.1 }}</li>{% endfor %}
       </ul>
     </div>
-   <div class="metadata">
+   <div id="word-metadata">
      <h2>{{ word }}</h2>
-     <h4>we wszystkich przemówieniach słowo wystąpiło</h4>
+     <p>we wszystkich przemówieniach słowo wystąpiło</p>
      <h3>{{ sum }} raz{% if sum != "1" %}y{% endif %}</h3>
    </div>
 {% endblock %}
