@@ -93,13 +93,17 @@ def year (request, object_id, width=4):
 
   speech = get_object_or_404 (Speech, pk=object_id)
   speeches = Speech.objects.filter(date__gte=speech.date).order_by('date')[:int(width)]
+  last_speech = Speech.objects.all().order_by('-date')[0]
   stats = Stat.objects.filter(speech__in=speeches)
   try:
     prev_speech = Speech.objects.filter(date__lt=speech.date).order_by('-date')[0]
   except IndexError:
     prev_speech = None
   try: 
-    next_speech = speeches[1]
+    if not speeches[int(width)-1] == last_speech:
+      next_speech = speeches[1]
+    else:
+      next_speech = None
   except IndexError:
     next_speech = None
   
