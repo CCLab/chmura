@@ -5,10 +5,10 @@
              <a href="{% url chmura.word.views.year object_id=prev.id width=width %}">&larr;</a>{% endif %}
            </div>{% for year in array %}
            <div class="year-head">
-             <h5>{{ year.0 }}</h5>
+             <h5><a href="{% url chmura.speech.views.speech object_id=year.0.id %}">{{ year.0.date.year }}</a></h5>
            </div>{% endfor %}
            <div class="year-head-nav">{% if next %}
-             <a href="">&rarr;</a>{% endif %}
+             <a href="{% url chmura.word.views.year object_id=next.id width=width %}">&rarr;</a>{% endif %}
            </div>
          </div>  
          <div class="cloud-row">

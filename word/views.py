@@ -101,7 +101,7 @@ def year (request, object_id, width=4):
   except IndexError:
     prev_speech = None
   try: 
-    next_speech = Speech.objects.filter(date__gt=speeches[len(speeches)].date).order_by('date')[0]  
+    next_speech = speeches[1]
   except IndexError:
     next_speech = None
   
@@ -110,7 +110,7 @@ def year (request, object_id, width=4):
   for speech in speeches:
   
     words = stats.filter(speech__exact=speech).order_by('-count')
-    array.append( ( speech.date.year, normalize_stat_queryset(words[:NUMWORDS])) )
+    array.append( ( speech, normalize_stat_queryset(words[:NUMWORDS])) )
 
   result = {'array': array, 'yearsactive': 'active', 'speechactive': 'off', 'prev': prev_speech, 'next': next_speech, 'width':width}
   template = loader.get_template("year.html")
