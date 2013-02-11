@@ -28,7 +28,7 @@ def speech(request, object_id):
   
   speech = get_object_or_404 (Speech, pk=object_id)
  
-  years = Speech.objects.all().order_by('-date')
+  years = [ (s, s==speech ) for s in Speech.objects.all().order_by('-date') ]
   sources = Source.objects.filter(speech__exact=speech).order_by('name')
 
   result = dict ( speech=speech, years=years, speechactive='active', yearsactive='off',
@@ -43,6 +43,8 @@ def speech(request, object_id):
   else:
     result ['word_count'] = []          
 
+  result['context_script'] = True
+  
   template = loader.get_template("speech.html")
   context = Context(result)
                             

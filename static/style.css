@@ -28,7 +28,10 @@ a { color: #000; text-decoration: none;}
 h1 {
 	font-weight: lighter;
 	font-size: 60px;
-	padding: 20px 40px;
+	padding: 20px 0px;
+color:#aaa;
+text-shadow:1px 1px 3px #fff;
+margin-left:150px;
 }
 /*
 h2 { font-size: 32px; font-weight: lighter; color: Sienna;} 
@@ -80,9 +83,10 @@ div.yearlist ul {
         margin-top:25px;
 }
 
-div.yearcount {
-margin-top:25px;
-}
+div.yearlist ul li.wybrany { font-weight:bold; }
+div.yearlist ul li.wybrany a { color:#e16f1e; }
+
+div.yearcount { margin-top:25px; }
 
 div.yearcount ul {
 	font-size:20px;
@@ -103,8 +107,7 @@ div.yearlist ul li a:hover { color: #000; font-weight:bold;}
 div.yearlist ul li a:active { color: #aaa; }
 
 div.yearlist ul li.barchart {
-	width: 35em;
-clear:right;
+	width: 35em; clear:right;
 }
 
 div.main {
@@ -129,7 +132,7 @@ div.main {
 
 img.head { margin-right: 1em; width:75px; height: 75px; float: left;}
 
-div.metainfo {
+div#metainfo {
 display:table;
 	margin-top:40px;
 	margin-left:10px;
@@ -139,7 +142,7 @@ display:table;
 	padding: 0px 10px 10px 0px; 
 	
 }
-div.metainfo h2 {
+div#metainfo h2 {
 display:table-row;
 	font-size:60px;
 	font-weight: lighter;
@@ -223,10 +226,26 @@ div.sources {
 
 div.sources a { color: #e16f1e; font-weight:bold;}
 
-div.chartbar { display: inline-block; background: Sienna; 
-               height: 18px; float: left; border: thin solid #e16f1e; 
-               margin-right: 1em; margin-top:3px; 
+div.chartbar {
+	display: inline;
+	background-color: #e16f1e; 
+	border: 1px solid #e16f1e; 
+        height: 18px;
+	float: left; 
+        margin-right: 1em;
+	margin-top:5px; 
 }
+
+li.barchart { clear:right; }
+
+li.barchart div.bar-rok {
+color:#aaa;
+display:inline;
+float:left;
+margin-left:40px;
+margin-right:25px;
+}
+
 
 /************** popup ****************/
 #popup {
@@ -235,14 +254,13 @@ z-index: 42;
 width:80%;
 border:1px solid gray;
 margin: 40px;
-padding: 5px 10px 0 10px;
 height:250px;
 overflow-y: scroll;
 background-color: white;
 box-shadow: 0 5px 15px #ccc;
 }
 
-#popup p { margin-bottom:1em; }
+#popup p { margin:1em 1em 1em 10px; }
 #popup p a { color: #000; }
 #popup p a:hover { color: #e16f1e; }
 #popup p a:active { color: #e16f1e; }
@@ -250,11 +268,47 @@ box-shadow: 0 5px 15px #ccc;
 
 #popup p a.wskazany { font-weight: bold; color: #e16f1e; }
 
+#popup #belka {
+margin:0;
+border-bottom:1px solid gray;
+text-align:right;
+text-transform:uppercase;
+}
+
+#popup #belka span#belka-close {
+cursor:pointer;
+color: #e16f1e;
+font-size:x-small;
+padding: 0 5px;
+}
+
 /************** end popup ****************/
 
 /************** słowa przez lata ****************/
-.years-table { margin:40px; }
-.years-row {
-border-top: 2px solid gray;
+.years-table { margin:40px 20px; }
+.year-head { }
+.year-head h5 {
+margin: 0 20px;
+border: 1px solid #ddd;
+background-color:#eee;
 }
+
+/** strzałki **/
+.year-head a {
+/*display:block;
+border:1px solid #e16f1e;*/
+font-weight:bolder;
+color:  #e16f1e;
+}
+/** end strzałki **/
+
+.cloud-cell ul {
+margin: 0 20px;
+}
+
+.cloud-cell ul li span a {}
+.cloud-cell ul li span a:hover {color: #e16f1e;}
+.cloud-cell ul li span a:active {}
+.cloud-cell ul li span a:visited {}
+
 

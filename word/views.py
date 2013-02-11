@@ -72,7 +72,7 @@ def word (request, object_id):
   for speech in speeches:
     count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
     counts.append ((speech, count))
-    years.append(speech)
+#    years.append(speech)
     sum = sum+count
     
   m = max([ int(item[1]) for item in counts ] )
@@ -120,15 +120,15 @@ def context(request, speech_id, lemma_id):
     p = w
     for i in xrange(WIDTH):
       p = p.prev
-      prev.append(p)
+      prev.append((p,None))
       
     prev.reverse()
     context = prev
-    context.append(w)
+    context.append((w, True))
     n = w
     for i in xrange(WIDTH):
       n = n.next
-      context.append(n)
+      context.append((n, None))
 
     result.append(tuple(context))
 

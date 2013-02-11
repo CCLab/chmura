@@ -3,6 +3,7 @@
     <div class="yearcount">
       <ul>{% for item in counts %}
         <li class="barchart">
+          <div class="bar-rok">{{ item.0.date.year }}</div>
           <div class="chartbar" style="width: {{ item.2 }}em;">&nbsp;</div>{{ item.1 }}</li>{% endfor %}
       </ul>
     </div>

@@ -1,4 +1,5 @@
+<div id="belka"><span id="belka-close" onclick="hide_popup()"> zamknij okno</span></div>
 {% for c in context %}
-<p>{% for word in c %}
-<a href="{% url chmura.word.views.word object_id=word.lemma.id %}">{{ word.word }}</a>
-{% endfor %}</p>{% endfor %}
+<p>[&hellip;]{% for word in c %}
+<a {% if word.1 %}class="wskazany" {% endif %}href="{% url chmura.word.views.word object_id=word.0.lemma.id %}">{{ word.0.word }}</a>
+{% endfor %}[&hellip;]</p>{% endfor %}
