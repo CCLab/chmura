@@ -70,12 +70,10 @@ def word (request, object_id):
   speeches = Speech.objects.all().order_by('-date')
   sum = 0
   counts = []
-  years = []  
   
   for speech in speeches:
     count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
     counts.append ((speech, count))
-#    years.append(speech)
     sum = sum+count
     
   m = max([ int(item[1]) for item in counts ] )
@@ -84,7 +82,7 @@ def word (request, object_id):
   template = loader.get_template("word.html")
   
   return HTTPResponse(template.render(Context({'counts':result,'yearsactive':'active',
-    'speechactive':'off', 'sum': sum, 'word': lemma.word, 'years': years })))
+    'speechactive':'off', 'sum': sum, 'word': lemma.word, 'years': None })))
   
 
 def year (request, object_id, width=4):
