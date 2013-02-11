@@ -42,9 +42,12 @@ def word_count (speech_id):
 
 
 def normalize_stat_queryset (qs):
-
-   max = float(qs.aggregate(Max('count'))['count__max'])
-   return  [ (s.lemma.word, str((float(s.count)/max)*3).replace(',','.'), s.count, s.lemma.id) for s in qs ]
+  if qs: 
+    max = float(qs.aggregate(Max('count'))['count__max'])
+    return  [ (s.lemma.word, str((float(s.count)/max)*3).replace(',','.'), s.count, s.lemma.id) for s in qs ]
+  else:
+    return []    
+   
   
 
 
@@ -91,10 +94,16 @@ def year (request, object_id, width=4):
   'year comparison views'
 
   speech = get_object_or_404 (Speech, pk=object_id)
-  speeches = Speech.objects.filter(date__gte=speech.date)[:int(width)]
+  speeches = Speech.objects.filter(date__gte=speech.date).order_by('date')[:int(width)]
   stats = Stat.objects.filter(speech__in=speeches)
-  prev_speech = Speech.objects.filter(date__lte=speech.date).order_by('date')[0]
-  next_speech = Speech.objects.filter(date__gte=speeches[len(speeches)].date).order_by('-date')[0]  
+  try:
+    prev_speech = Speech.objects.filter(date__lt=speech.date).order_by('-date')[0]
+  except IndexError:
+    prev_speech = None
+  try: 
+    next_speech = Speech.objects.filter(date__gt=speeches[len(speeches)].date).order_by('date')[0]  
+  except IndexError:
+    next_speech = None
   
   array = []
     
@@ -103,7 +112,7 @@ def year (request, object_id, width=4):
     words = stats.filter(speech__exact=speech).order_by('-count')
     array.append( ( speech.date.year, normalize_stat_queryset(words[:NUMWORDS])) )
 
-  result = {'array': array, 'yearsactive': 'active', 'speechactive': 'off', 'prev': prev_speech, 'next': next_speech}
+  result = {'array': array, 'yearsactive': 'active', 'speechactive': 'off', 'prev': prev_speech, 'next': next_speech, 'width':width}
   template = loader.get_template("year.html")
   
   return HTTPResponse(template.render(Context(result)))

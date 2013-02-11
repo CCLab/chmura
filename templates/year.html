@@ -1,19 +1,22 @@
 {% extends "page.html" %}{% block content %}
        <div class="years-table">
          <div class="years-row">
-<div class="year-head-nav"><a href="{% url chmura.word.views.year object_id=prev.id width=4 %}">&larr;</a></div>
-{% for year in array %}
+           <div class="year-head-nav">{% if prev %}
+             <a href="{% url chmura.word.views.year object_id=prev.id width=width %}">&larr;</a>{% endif %}
+           </div>{% for year in array %}
            <div class="year-head">
              <h5>{{ year.0 }}</h5>
            </div>{% endfor %}
-<div class="year-head-nav"><a href="">&rarr;</a></div>
+           <div class="year-head-nav">{% if next %}
+             <a href="">&rarr;</a>{% endif %}
+           </div>
          </div>  
          <div class="cloud-row">
 <div class="cloud-cell-nav">&nbsp;</div>
 {% for year in array %}
            <div class="cloud-cell">
              <ul>{% for stat in year.1 %}
-               <li><span style="font-size: {{ stat.1 }}ex;">
+               <li><span style="font-size: {{ stat.1 }}em;">
                  <a href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</a></span>&nbsp;&nbsp;<sup>({{ stat.2 }})</sup></li>{% endfor %}
              </ul>
          </div>{% endfor %}
