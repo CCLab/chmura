@@ -5,13 +5,19 @@ import sys, json
 from operator import itemgetter
 
 from django.http import HttpResponse as HTTPResponse
+from django.http import HttpResponseRedirect as HTTPResponseRedirect
 from django.template import Context, RequestContext, loader, Template
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
+from django.core.urlresolvers import reverse
 
 from models import Word, Lemma, Ignore, Compound, Stat
 from chmura.speech.models import Speech
+
+###
+
+ignores = Ignore.objects.all().values_list('lemma', flat=True)
 
 ### utility function
 # THIS IS NOT A VIEW
@@ -66,13 +72,13 @@ def word (request, object_id):
   WIDTH = 20
   
   lemma = get_object_or_404(Lemma, pk=object_id)
-  stats = Stat.objects.filter(lemma__exact=lemma)
+  stats = Stat.objects.exclude(lemma__in=ignores).filter(lemma__exact=lemma)
   speeches = Speech.objects.all().order_by('-date')
   sum = 0
   counts = []
   
   for speech in speeches:
-    count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
+    count = Word.objects.exclude(lemma__in=ignores).filter(lemma__exact=lemma, speech__exact=speech).count()    
     counts.append ((speech, count))
     sum = sum+count
     
@@ -94,7 +100,7 @@ def year (request, object_id, width=4):
   speech = get_object_or_404 (Speech, pk=object_id)
   speeches = Speech.objects.filter(date__gte=speech.date).order_by('date')[:int(width)]
   last_speech = Speech.objects.all().order_by('-date')[0]
-  stats = Stat.objects.filter(speech__in=speeches)
+  stats = Stat.objects.exclude(lemma__in=ignores).filter(speech__in=speeches)
   try:
     prev_speech = Speech.objects.filter(date__lt=speech.date).order_by('-date')[0]
   except IndexError:
@@ -133,17 +139,23 @@ def context(request, speech_id, lemma_id):
     context, prev = [], []
     p = w
     for i in xrange(WIDTH):
-      p = p.prev
-      prev.append((p,None))
+      try:
+        p = p.prev 
+        prev.append((p,None))        
+      except AttributeError:
+        continue
+
       
     prev.reverse()
     context = prev
     context.append((w, True))
     n = w
     for i in xrange(WIDTH):
-      n = n.next
-      context.append((n, None))
-
+      try: 
+        n = n.next
+        context.append((n, None))
+      except AttributeError:
+        continue
     result.append(tuple(context))
 
   template = loader.get_template("context.html")
@@ -169,4 +181,4 @@ def cache (request):
       if created:
         stat.save()
 
-  return HTTPResponse()
+  return HTTPResponseRedirect(reverse('chmura.speech.views.main'))

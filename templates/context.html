@@ -2,6 +2,6 @@
  w roku {{ speech.date.year }} słowo {{ lemma.word }} wystąpiło {{ count }} razy <span id="belka-close" onclick="hide_popup()">zamknij okno</span>
 </div>
 {% for c in context %}
-<p>[&hellip;]{% for word in c %}
-<a {% if word.1 %}class="wskazany" {% endif %}href="{% url chmura.word.views.word object_id=word.0.lemma.id %}">{{ word.0.word }}</a>
+<p>[&hellip;]{% for word in c %}{% if word.0 %}
+<a {% if word.1 %}class="wskazany" {% endif %}href="{% url chmura.word.views.word object_id=word.0.lemma.id %}">{{ word.0.display }}</a>{% endif %}
 {% endfor %}[&hellip;]</p>{% endfor %}

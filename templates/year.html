@@ -18,7 +18,7 @@
              <ul>{% for stat in year.1 %}
                <li><span style="font-size: {{ stat.1 }}em;">
                  <a title="kliknij tutaj, żeby zobaczyć statystyki"
-                   href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</a></span>&nbsp;&nbsp;<sup>({{ stat.2 }})</sup></li>{% endfor %}
+                   href="{% url chmura.word.views.word object_id=stat.3 %}">{{ stat.0 }}</a></span>&nbsp;&nbsp;<small>({{ stat.2 }})</small></li>{% endfor %}
              </ul>
          </div>{% endfor %}
 <div class="cloud-cell-nav">&nbsp;</div>

@@ -8,7 +8,10 @@
     <script src="/static/popup.js" type="text/javascript"></script>{% endif %}
   </head>
   <body>
-    <h1>Polski budżet w słowach</h1>
+<div id="header" class="group">
+	<a href="http://centrumcyfrowe.pl/" target="_blank"><img id="cc" src="/static/uploads/ccpp_logo_80.png"></a>
+	<h1>Polski budżet w słowach</h1>
+</div><!-- end header -->
     <div class="navi-tabs group">
       <ul>
         <li><a href="{% url chmura.speech.views.speech object_id=1 %}" id="{{ speechactive }}">Przemówienia</a></li>
@@ -25,5 +28,10 @@
     <div class="main group">
       <div class="content">{% block content %}{% endblock %}      </div>
     </div>
+</div> <!-- zamknięcie maina -->
+<div id="footer">
+<p>Wizualizacja statystyk występowania słów w&nbsp;expose budżetowych ministrów finansów Rzeczpospolitej Polskiej. Projekt Centrum Cyfrowego finansowany przez <a href="http://www.ceetrust.org/" target="_blank">Trust for Civil Society in Central and Eastern Europe</a>.</p>
+<div id="foot-logo"><img src="/static/uploads/Logo_Trust_New_80.png"></div>
+</div>
   </body>
 </html>
