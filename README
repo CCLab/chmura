@@ -8,7 +8,13 @@ flexibility into account.
 See COPYING. This project is (C) Centrum Cyfrowe: Projekt Polska and is
 covered by GNU General Public Licence V3 or later.
 
-* The problem
+* Deployment
+
+This is a set of two Django apps. To deploy this project create Django
+runtime environment (django-admin startproject <directory>), deploy the apps
+in that directory, enable them in settings.py and do a syncdb.
+
+* The language problem
 
 In Polish language words are flexible, almost all words. The words
 "przetwarzać", "przetwarzałem", "przetworzę" ale the same word in various
