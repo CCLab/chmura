@@ -83,7 +83,7 @@ def word (request, object_id):
     sum = sum+count
     
   m = max([ int(item[1]) for item in counts ] )
-  result = [ (item[0], item[1], str((float(item[1])/m)*WIDTH)) for item in counts ]
+  result = [ (item[0], item[1], str((float(item[1])/m if m else 1)*WIDTH)) for item in counts ]
   
   template = loader.get_template("word.html")
   
