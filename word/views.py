@@ -78,12 +78,12 @@ def word (request, object_id):
   counts = []
   
   for speech in speeches:
-    count = Word.objects.exclude(lemma__in=ignores).filter(lemma__exact=lemma, speech__exact=speech).count()    
+    count = Word.objects.filter(lemma__exact=lemma, speech__exact=speech).count()    
     counts.append ((speech, count))
     sum = sum+count
     
   m = max([ int(item[1]) for item in counts ] )
-  result = [ (item[0], item[1], str((float(item[1])/m)*WIDTH)) for item in counts ]
+  result = [ (item[0], item[1], str((float(item[1])/m if m else 1)*WIDTH)) for item in counts ]
   
   template = loader.get_template("word.html")
   
