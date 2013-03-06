@@ -12,6 +12,7 @@ class Speaker (models.Model):
   name = models.TextField()
   function = models.TextField()
   head = models.ImageField(upload_to='uploads')
+  head_rights = models.TextField()
   
   def __unicode__(self):
     return "%s: %s" % (self.name, self.function)
