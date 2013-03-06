@@ -12,7 +12,8 @@
 <div id="twarz">
             <div class="speaker">
               <img src="{{ speech.speaker.head.url }}" id="head" class="head" 
-                alt="{{ speech.speaker.name }}: portret" /> 
+                alt="{{ speech.speaker.name }}: portret"
+                title="Żródło: {{ speech.speaker.head_rights }}"/> 
               <h4>{{ speech.speaker.function }}</h4>
               <h3>{{ speech.speaker.name }}</h3>
             </div>
