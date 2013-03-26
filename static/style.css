@@ -67,6 +67,7 @@ div.navi-tabs ul {
 	z-index: 5;
 	left: 170px;
 	top: 1px;
+        width: 80%;
 }
 
 div.navi-tabs ul li {
